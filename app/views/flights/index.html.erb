@@ -1,4 +1,40 @@
 <h1>Flights</h1>
+<%= params %>
+<form action="/flights" method="get" accept-charset="UTF-8" >
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <select name="flight[departure_airport_id]">
+    <option disabled selected value> -- select departure airport -- </option>
+    <%= @airports.each do |airport| %>
+      <option value="<%= airport.id %>"><%= airport.code %></option>
+    <% end %>
+  </select>
+
+  <select name="flight[arrival_airport_id]">
+    <option disabled selected value> -- select destination airport -- </option>
+    <%= @airports.each do |airport| %>
+      <option value="<%= airport.id %>"><%= airport.code %></option>
+    <% end %>
+  </select>
+
+  <select name="flight[departure_time]">
+    <option disabled selected value> -- select travel date -- </option>
+    <%= @dates.each do |date| %>
+      <option value="<%= date %>"><%= date %></option>
+    <% end %>
+  </select>
+
+  <select name="number_of_tickets">
+    <option disabled selected value> -- ticket amount -- </option>
+    <%= (1..4).each do |amount| %>
+      <option value="<%= amount %>"><%= amount %></option>
+    <% end %>
+  </select>
+
+  <input name="commit" type="submit" value="Search" data-disable-with="Search" />
+</form>
+
+
 <% @flights.each do |flight| %>
   <div>Departure airport: <%= flight.departure_airport.code %></div>
   <div>Destination airport: <%= flight.arrival_airport.code %></div>
