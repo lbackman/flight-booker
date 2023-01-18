@@ -1,0 +1,8 @@
+<h1>Flights</h1>
+<% @flights.each do |flight| %>
+  <div>Departure airport: <%= flight.departure_airport.code %></div>
+  <div>Destination airport: <%= flight.arrival_airport.code %></div>
+  <div>Departure time: <%= flight.departure_time %></div>
+  <div>Flight duration: <%= flight.flight_duration_minutes %> minutes</div>
+  <br>
+<% end %>
