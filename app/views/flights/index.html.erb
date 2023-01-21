@@ -3,21 +3,21 @@
 <form action="/flights" method="get" accept-charset="UTF-8" >
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <select name="flight[departure_airport_id]">
+  <select name="departure_id">
     <option disabled selected value> -- select departure airport -- </option>
     <%= @airports.each do |airport| %>
       <option value="<%= airport.id %>"><%= airport.code %></option>
     <% end %>
   </select>
 
-  <select name="flight[arrival_airport_id]">
+  <select name="arrival_id">
     <option disabled selected value> -- select destination airport -- </option>
     <%= @airports.each do |airport| %>
       <option value="<%= airport.id %>"><%= airport.code %></option>
     <% end %>
   </select>
 
-  <select name="flight[departure_time]">
+  <select name="departure_time">
     <option disabled selected value> -- select travel date -- </option>
     <%= @dates.each do |date| %>
       <option value="<%= date %>"><%= date %></option>
