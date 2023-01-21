@@ -14,9 +14,9 @@ class Flight < ApplicationRecord
 
   def self.search(departure_id, arrival_id, departure_time)
     searches = []
-    searches << [:where, 'departure_airport_id = ?', departure_id] if departure_id
-    searches << [:where, 'arrival_airport_id = ?', arrival_id] if arrival_id
-    if departure_time
+    searches << [:where, 'departure_airport_id = ?', departure_id] if departure_id && departure_id != ''
+    searches << [:where, 'arrival_airport_id = ?', arrival_id] if arrival_id && arrival_id != ''
+    if departure_time && departure_time != ''
       searches << [:where, 'departure_time >= ? AND departure_time < ?', departure_time.to_datetime.midnight, departure_time.to_datetime.midnight + 1.day]
     else
       searches << [:upcoming]

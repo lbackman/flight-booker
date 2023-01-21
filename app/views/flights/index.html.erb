@@ -4,36 +4,55 @@
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <select name="departure_id">
-    <option disabled selected value> -- select departure airport -- </option>
-    <%= @airports.each do |airport| %>
-      <option value="<%= airport.id %>"><%= airport.code %></option>
+    <option selected value> -- select departure airport -- </option>
+
+    <% @airports.each do |airport| %>
+      <% if params[:departure_id].to_i == airport.id %>
+        <option selected value="<%= airport.id %>"><%= airport.code %></option>
+      <% else %>
+        <option value="<%= airport.id %>"><%= airport.code %></option>
+      <% end %>
     <% end %>
   </select>
 
   <select name="arrival_id">
-    <option disabled selected value> -- select destination airport -- </option>
-    <%= @airports.each do |airport| %>
-      <option value="<%= airport.id %>"><%= airport.code %></option>
+    <option selected value> -- select destination airport -- </option>
+
+    <% @airports.each do |airport| %>
+      <% if params[:arrival_id].to_i == airport.id %>
+        <option selected value="<%= airport.id %>"><%= airport.code %></option>
+      <% else %>
+        <option value="<%= airport.id %>"><%= airport.code %></option>
+      <% end %>
     <% end %>
   </select>
 
   <select name="departure_time">
-    <option disabled selected value> -- select travel date -- </option>
-    <%= @dates.each do |date| %>
-      <option value="<%= date %>"><%= date %></option>
+    <option selected value> -- select travel date -- </option>
+
+    <% @dates.each do |date| %>
+      <% if params[:departure_time]&.to_datetime == date %>
+        <option selected value="<%= date %>"><%= date %></option>
+      <% else %>
+        <option value="<%= date %>"><%= date %></option>
+      <% end %>
     <% end %>
   </select>
 
   <select name="number_of_tickets">
-    <option disabled selected value> -- ticket amount -- </option>
-    <%= (1..4).each do |amount| %>
-      <option value="<%= amount %>"><%= amount %></option>
+    <option selected value> -- tickets -- </option>
+
+    <% (1..4).each do |amount| %>
+      <% if params[:number_of_tickets].to_i == amount %>
+        <option selected value="<%= amount %>"><%= amount %></option>
+      <% else %>
+        <option value="<%= amount %>"><%= amount %></option>
+      <% end %>
     <% end %>
   </select>
 
   <input name="commit" type="submit" value="Search" data-disable-with="Search" />
 </form>
-
 
 <% @flights.each do |flight| %>
   <div>Departure airport: <%= flight.departure_airport.code %></div>
