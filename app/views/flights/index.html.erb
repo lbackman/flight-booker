@@ -31,7 +31,7 @@
     <option selected value> -- select travel date -- </option>
 
     <% @dates.each do |date| %>
-      <% if params[:departure_time]&.to_datetime == date %>
+      <% if params[:departure_time]&.to_date == date %>
         <option selected value="<%= date %>"><%= date %></option>
       <% else %>
         <option value="<%= date %>"><%= date %></option>
