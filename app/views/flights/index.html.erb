@@ -1,41 +1,6 @@
 <h1>Flights</h1>
 <%= params %>
-
-<%= form_with url: "/flights", method: :get do |form| %>
-  <%= form.collection_select(
-      :departure_id,
-      @airports,
-      :id,
-      :code,
-      include_blank: '-- departure airport --',
-      selected: params[:departure_id]
-    ) %>
-  <%= form.collection_select(
-      :arrival_id,
-      @airports,
-      :id,
-      :code,
-      include_blank: '-- destination airport --',
-      selected: params[:arrival_id]
-    ) %>
-  <%= form.collection_select(
-      :departure_time,
-      @dates,
-      :to_s,
-      proc { |date| date.strftime("%d %B %Y") },
-      include_blank: '-- travel date --',
-      selected: params[:departure_time]
-    ) %>
-  <%= form.collection_select(
-      :number_of_tickets,
-      (1..4),
-      :to_i,
-      :to_i,
-      include_blank: '-- tickets --',
-      selected: params[:number_of_tickets]
-    ) %>
-  <%= form.submit "Search" %>
-<% end %>
+<%= render 'search_flights_form', airports: @airports, dates: @dates %>
 
 <% @flights.each do |flight| %>
   <div>Departure airport: <%= flight.departure_airport.code %></div>
