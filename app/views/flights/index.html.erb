@@ -1,58 +1,41 @@
 <h1>Flights</h1>
 <%= params %>
-<form action="/flights" method="get" accept-charset="UTF-8" >
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <select name="departure_id">
-    <option selected value> -- select departure airport -- </option>
-
-    <% @airports.each do |airport| %>
-      <% if params[:departure_id].to_i == airport.id %>
-        <option selected value="<%= airport.id %>"><%= airport.code %></option>
-      <% else %>
-        <option value="<%= airport.id %>"><%= airport.code %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <select name="arrival_id">
-    <option selected value> -- select destination airport -- </option>
-
-    <% @airports.each do |airport| %>
-      <% if params[:arrival_id].to_i == airport.id %>
-        <option selected value="<%= airport.id %>"><%= airport.code %></option>
-      <% else %>
-        <option value="<%= airport.id %>"><%= airport.code %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <select name="departure_time">
-    <option selected value> -- select travel date -- </option>
-
-    <% @dates.each do |date| %>
-      <% if params[:departure_time]&.to_date == date %>
-        <option selected value="<%= date %>"><%= date %></option>
-      <% else %>
-        <option value="<%= date %>"><%= date %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <select name="number_of_tickets">
-    <option selected value> -- tickets -- </option>
-
-    <% (1..4).each do |amount| %>
-      <% if params[:number_of_tickets].to_i == amount %>
-        <option selected value="<%= amount %>"><%= amount %></option>
-      <% else %>
-        <option value="<%= amount %>"><%= amount %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <input name="commit" type="submit" value="Search" data-disable-with="Search" />
-</form>
+<%= form_with url: "/flights", method: :get do |form| %>
+  <%= form.collection_select(
+      :departure_id,
+      @airports,
+      :id,
+      :code,
+      include_blank: '-- departure airport --',
+      selected: params[:departure_id]
+    ) %>
+  <%= form.collection_select(
+      :arrival_id,
+      @airports,
+      :id,
+      :code,
+      include_blank: '-- destination airport --',
+      selected: params[:arrival_id]
+    ) %>
+  <%= form.collection_select(
+      :departure_time,
+      @dates,
+      :to_s,
+      proc { |date| date.strftime("%d %B %Y") },
+      include_blank: '-- travel date --',
+      selected: params[:departure_time]
+    ) %>
+  <%= form.collection_select(
+      :number_of_tickets,
+      (1..4),
+      :to_i,
+      :to_i,
+      include_blank: '-- tickets --',
+      selected: params[:number_of_tickets]
+    ) %>
+  <%= form.submit "Search" %>
+<% end %>
 
 <% @flights.each do |flight| %>
   <div>Departure airport: <%= flight.departure_airport.code %></div>
