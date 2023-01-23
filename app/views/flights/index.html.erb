@@ -2,10 +2,28 @@
 <%= params %>
 <%= render 'search_flights_form', airports: @airports, dates: @dates %>
 
-<% @flights.each do |flight| %>
-  <div>Departure airport: <%= flight.departure_airport.code %></div>
-  <div>Destination airport: <%= flight.arrival_airport.code %></div>
-  <div>Departure time: <%= date_readable(flight.departure_time) %></div>
-  <div>Flight duration: <%= to_hours_minutes(flight.flight_duration_minutes) %></div>
-  <br>
+<%= form_with do |form| %>
+  <input hidden name="number_of_tickets" value="<%= params[:number_of_tickets] %>">
+  <% @flights.each do |flight| %>
+    <%= form.radio_button 'flight_id', flight.id, disabled: invalid_ticket_amount?(params[:number_of_tickets]) %>
+    <%= form.label "flight_id_#{flight.id}" do %>
+      <div>Departure airport: <%= flight.departure_airport.code %></div>
+      <div>Destination airport: <%= flight.arrival_airport.code %></div>
+      <div>Departure time: <%= date_readable(flight.departure_time) %></div>
+      <div>Flight duration: <%= to_hours_minutes(flight.flight_duration_minutes) %></div>
+      <br>
+    <% end %>
+  <% end %>
+  <%= form.submit "Book flight" %>
+<% end %>
+
+<%# html below not rendered %>
+<% if false %>
+  <% @flights.each do |flight| %>
+    <div>Departure airport: <%= flight.departure_airport.code %></div>
+    <div>Destination airport: <%= flight.arrival_airport.code %></div>
+    <div>Departure time: <%= date_readable(flight.departure_time) %></div>
+    <div>Flight duration: <%= to_hours_minutes(flight.flight_duration_minutes) %></div>
+    <br>
+  <% end %>
 <% end %>
