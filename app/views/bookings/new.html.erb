@@ -1,0 +1,30 @@
+<% flight = Flight.find(params[:flight_id]) %>
+
+<h1>Book flight</h1>
+
+<h3>Flight information</h3>
+<div>Departure airport: <%= flight.departure_airport.code %></div>
+<div>Destination airport: <%= flight.arrival_airport.code %></div>
+<div>Departure time: <%= date_readable(flight.departure_time) %></div>
+<div>Flight duration: <%= to_hours_minutes(flight.flight_duration_minutes) %></div>
+<br>
+<% passenger_amount = params[:number_of_tickets].to_i %>
+
+<%= form_with model: @booking do |f| %>
+  <input hidden name = "flight_id" value="<%= flight.id %>">
+  <% passenger_amount.times do |passenger| %>
+    <%= f.fields_for :passengers do |sub_form| %>
+      <div><strong><%= "Passenger #{passenger + 1}" %></strong></div>
+      <div>
+        <%= sub_form.label :name, 'Name' %>
+        <%= sub_form.text_field :name %>
+      </div>
+      <div>
+        <%= sub_form.label :email, "Email" %>
+        <%= sub_form.text_field :email %>
+      </div>
+      <br>
+    <% end %>
+  <% end %>
+  <%= f.submit %>
+<% end %>

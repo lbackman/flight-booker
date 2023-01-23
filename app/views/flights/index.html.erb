@@ -2,7 +2,7 @@
 <%= params %>
 <%= render 'search_flights_form', airports: @airports, dates: @dates %>
 
-<%= form_with do |form| %>
+<%= form_with url: '/bookings/new', method: :get do |form| %>
   <input hidden name="number_of_tickets" value="<%= params[:number_of_tickets] %>">
   <% @flights.each do |flight| %>
     <%= form.radio_button 'flight_id', flight.id, disabled: invalid_ticket_amount?(params[:number_of_tickets]) %>
