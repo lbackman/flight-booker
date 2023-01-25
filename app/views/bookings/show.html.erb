@@ -1,5 +1,8 @@
 <h1>Booking information</h1>
-<p>Flight <%= @booking.flight_id %></p>
+<h2>Flight <%= @booking.flight_id %></h2>
+
+<h3>Flight information</h3>
+<%= render 'flights/flight_information', flight: Flight.find(@booking.flight_id) %>
 
 <h3>Passenger information</h3>
 <% @booking.passengers.each do |passenger| %>
