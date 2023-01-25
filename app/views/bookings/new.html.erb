@@ -1,5 +1,5 @@
 <% flight = Flight.find(params[:flight_id]) %>
-
+<%= params %>
 <h1>Book flight</h1>
 
 <h3>Flight information</h3>
@@ -10,10 +10,10 @@
 <br>
 <% passenger_amount = params[:number_of_tickets].to_i %>
 
-<%= form_with model: @booking do |f| %>
-  <input hidden name = "flight_id" value="<%= flight.id %>">
+<%= form_with model: @booking do |form| %>
+  <input hidden name="booking[flight_id]" value="<%= flight.id %>">
   <% passenger_amount.times do |passenger| %>
-    <%= f.fields_for :passengers do |sub_form| %>
+    <%= form.fields_for :passengers do |sub_form| %>
       <div><strong><%= "Passenger #{passenger + 1}" %></strong></div>
       <div>
         <%= sub_form.label :name, 'Name' %>
@@ -26,5 +26,5 @@
       <br>
     <% end %>
   <% end %>
-  <%= f.submit %>
+  <%= form.submit %>
 <% end %>
