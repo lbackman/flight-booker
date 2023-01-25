@@ -15,6 +15,9 @@ gem "pg", "~> 1.1"
 # Use bullet to identify N + 1 queries
 gem 'bullet', group: 'development'
 
+# Paginate flights index page with kaminari
+gem 'kaminari'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 

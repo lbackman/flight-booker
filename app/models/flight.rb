@@ -4,6 +4,8 @@ class Flight < ApplicationRecord
   has_many :bookings
   has_many :passengers, through: :bookings
 
+  paginates_per 15
+
   scope :upcoming, -> { 
     where("departure_time > ?", Time.now)
       .order(:departure_time)

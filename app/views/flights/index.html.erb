@@ -1,5 +1,7 @@
 <h1>Flights</h1>
 
+<%= paginate @flights %>
+<br>
 <%= render 'search_flights_form', airports: @airports, dates: @dates %>
 
 <%= form_with url: '/bookings/new', method: :get do |form| %>
@@ -14,3 +16,7 @@
   <% end %>
   <%= form.submit "Book flight" %>
 <% end %>
+
+<br>
+<%= paginate @flights %>
+<br>
