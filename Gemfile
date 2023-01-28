@@ -18,6 +18,10 @@ gem 'bullet', group: 'development'
 # Paginate flights index page with kaminari
 gem 'kaminari'
 
+# Bootstrap gem for styling
+gem 'bootstrap', '~> 5.2.2'
+gem 'popper_js', '~> 2.11.5'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
