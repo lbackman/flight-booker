@@ -6,9 +6,10 @@
 
 <h3>Passenger information</h3>
 <% @booking.passengers.each do |passenger| %>
-  <p>Name: <%= passenger.name %></p>
-  <p>Email: <%= passenger.email %></p>
-  <br>
+  <div class="passenger">
+    <p>Name: <%= passenger.name %></p>
+    <p>Email: <%= passenger.email %></p>
+  </div>
 <% end %>
 
 <%= link_to 'Back to flights', root_path %>

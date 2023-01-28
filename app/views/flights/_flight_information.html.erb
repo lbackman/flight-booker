@@ -1,5 +1,6 @@
-<div>Departure airport: <%= flight.departure_airport.code %></div>
-<div>Destination airport: <%= flight.arrival_airport.code %></div>
-<div>Departure time: <%= date_readable(flight.departure_time) %></div>
-<div>Flight duration: <%= to_hours_minutes(flight.flight_duration_minutes) %></div>
-<br>
+<div class="flight-info">
+  <p>Departure airport: <%= flight.departure_airport.code %></p>
+  <p>Destination airport: <%= flight.arrival_airport.code %></p>
+  <p>Departure time: <%= date_readable(flight.departure_time) %></p>
+  <p>Flight duration: <%= to_hours_minutes(flight.flight_duration_minutes) %></p>
+</div>

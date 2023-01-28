@@ -13,3 +13,79 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+body {
+    background-image: linear-gradient(#a1b5ab, #8e88b2);
+    min-height: 100vh;
+}
+.flight-info p {
+    margin-bottom: 6px;
+}
+
+.flight-info {
+    // background-color: rgb(197, 200, 207);
+    padding: 10px;
+    border-radius: 10px;
+    // margin-left: 24px;
+}
+
+.radio-toolbar {
+    display: flex;
+    padding: 10px;
+    width: fit-content;
+    // border: 1px solid black;
+    border-radius: 10px;
+}
+
+.search-form {
+    margin-bottom: 12px;
+}
+
+.pagination span {
+    margin-right: 4px;
+}
+
+.radio-toolbar input[type="radio"] {
+    display: none;
+}
+  
+.radio-toolbar label {
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 10px;
+    width: 350px;
+    padding: 4px 11px;
+    font-family: Arial;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 1px 2px 2px #333;
+}
+  
+.radio-toolbar input[type="radio"]:checked+label {
+    background-color: rgb(123, 210, 16);
+    border-radius: 10px;
+    box-shadow: inset 1px 2px 2px rgb(33, 48, 31);
+}
+
+.search-grid {
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 10px;
+}
+
+.input-row {
+    margin-bottom: 20px;
+}
+
+.input-row label {
+    width: 50px;
+}
+
+.passenger {
+    margin-bottom: 20px;
+    background-color: rgb(240, 240, 240);
+    max-width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+}

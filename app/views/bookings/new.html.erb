@@ -21,18 +21,17 @@
 
   <%= form.fields_for :passengers do |sub_form| %>
     <div><strong><%= "Passenger information:" %></strong></div>
-    <div>
+    <div class="input-row">
       <%= sub_form.label :name, 'Name' %>
       <%= sub_form.text_field :name %>
     </div>
-    <div>
+    <div class="input-row">
       <%= sub_form.label :email, "Email" %>
       <%= sub_form.text_field :email %>
     </div>
-    <br>
   <% end %>
 
-  <%= form.submit %>
+  <%= form.submit "Book flight", class: "btn btn-secondary btn-sm" %>
 <% end %>
 
 <%= link_to 'Back to flights', root_path %>
