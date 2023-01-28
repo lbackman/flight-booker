@@ -3,20 +3,23 @@
 <%= paginate @flights %>
 <br>
 <%= render 'search_flights_form', airports: @airports, dates: @dates %>
-
-<%= form_with url: '/bookings/new', method: :get do |form| %>
-  <input hidden name="number_of_tickets" value="<%= params[:number_of_tickets] %>">
-  <% @flights.each do |flight| %>
-    <div class="mb-3">
-      <div class="radio-toolbar">
-        <%= form.radio_button 'flight_id', flight.id, disabled: invalid_ticket_amount?(params[:number_of_tickets]) %>
-        <%= form.label "flight_id_#{flight.id}" do %>
-          <%= render 'flight_information', flight: flight %>
-        <% end %>
+<%if @flights.any? %>
+  <%= form_with url: '/bookings/new', method: :get do |form| %>
+    <input hidden name="number_of_tickets" value="<%= params[:number_of_tickets] %>">
+    <% @flights.each do |flight| %>
+      <div class="mb-3">
+        <div class="radio-toolbar">
+          <%= form.radio_button 'flight_id', flight.id, disabled: invalid_ticket_amount?(params[:number_of_tickets]) %>
+          <%= form.label "flight_id_#{flight.id}" do %>
+            <%= render 'flight_information', flight: flight %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
+    <%= form.submit "Book flight", class: "btn btn-primary btn-lg" %>
   <% end %>
-  <%= form.submit "Book flight", class: "btn btn-primary btn-lg" %>
+<% else %>
+  <p>No flights match the search parameters.</p>
 <% end %>
 
 <br>
