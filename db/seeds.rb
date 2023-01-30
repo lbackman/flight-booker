@@ -6,8 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord.id of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+Passenger.delete_all
+Booking.delete_all
 Flight.delete_all
-# Airport.delete_all
 
 lax = Airport.find_or_create_by(code: 'LAX')
 jfk = Airport.find_or_create_by(code: 'JFK')
@@ -24,7 +25,7 @@ def random_future_time(days_in_future)
   (Time.now.midnight + (24*days_in_future + (rand*24).floor).hours).beginning_of_hour
 end
 
-10.times do |days_from_now|
+400.times do |days_from_now|
   Flight.create(
     [
       {departure_airport_id: lax.id, arrival_airport_id: jfk.id, departure_time: random_future_time(days_from_now), flight_duration_minutes: 250},
