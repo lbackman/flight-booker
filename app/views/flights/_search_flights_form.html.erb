@@ -19,7 +19,7 @@
                       value: params[:departure_time],
                       placeholder: "dd/mm/yyyy" %>
 
-    <%= form.collection_select :number_of_tickets,
+    <%# form.collection_select :number_of_tickets,
                       (1..4),
                       :to_i,
                       :to_i,
