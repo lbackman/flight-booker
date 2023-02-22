@@ -1,8 +1,7 @@
 class BookingsController < ApplicationController
   def new
-    @passenger_amount = passenger_amount
     @booking = Booking.new
-    @passenger_amount.times { @booking.passengers.build }
+    @booking.passengers.build
   end
 
   def create
@@ -12,7 +11,6 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking.id), notice: "Flight successfully booked!"
     else
       @flight = Flight.find(booking_params[:flight_id])
-      @passenger_amount = booking_params[:passengers_attributes].to_h.count
       render :new, status: :unprocessable_entity
     end
   end
@@ -25,9 +23,5 @@ class BookingsController < ApplicationController
 
     def booking_params
       params.require(:booking).permit(:flight_id, passengers_attributes: [:_destroy, :id, :name, :email])
-    end
-
-    def passenger_amount
-      params[:number_of_tickets].to_i
     end
 end
