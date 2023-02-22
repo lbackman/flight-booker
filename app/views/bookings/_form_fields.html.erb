@@ -1,0 +1,16 @@
+<div class="passenger-info">
+  <%= sub_form.hidden_field :_destroy %>
+  <div><strong><%= "Passenger information:" %></strong></div>
+  <div class="input-row">
+    <%= sub_form.label :name, 'Name' %>
+    <%= sub_form.text_field :name %>
+  </div>
+  <div class="input-row">
+    <%= sub_form.label :email, "Email" %>
+    <%= sub_form.text_field :email %>
+  </div>
+  <div class="remove-btn">
+    <%= link_to "Remove passenger", "#", data: { action: "click->passenger#removePassenger" },
+                                class: "btn btn-danger btn-sm mb-5" %>
+  </div>
+</div>
