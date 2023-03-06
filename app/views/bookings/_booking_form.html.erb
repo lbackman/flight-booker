@@ -1,0 +1,19 @@
+<div data-controller="passenger">
+
+  <%= form_with model: booking do |form| %>
+    <input hidden name="booking[flight_id]" value="<%= flight_id %>">
+
+    <template id="passenger-info" data-passenger-target='template'>
+      <%= form.fields_for :passengers, child_index: 'TEMPLATE_RECORD' do |sub_form| %>
+        <%= render 'form_fields', sub_form: sub_form %>
+      <% end %>
+    </template>
+
+    <div data-passenger-target="add_item">
+      <%= link_to "Add passenger", "#", data: { action: "passenger#addPassenger" },
+                                        class: "btn btn-secondary btn-md mb-3" %>
+    </div>
+
+    <%= form.submit "Book flight", class: "btn btn-success btn-lg mb-5" %>
+  <% end %>
+</div>

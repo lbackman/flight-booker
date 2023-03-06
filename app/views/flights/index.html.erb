@@ -3,13 +3,13 @@
 <%= paginate @flights %>
 <br>
 <%= render 'search_flights_form', airports: @airports, dates: @dates %>
-<%if @flights.any? %>
+<% if @flights.any? %>
   <%= form_with url: '/bookings/new', method: :get do |form| %>
-    <input hidden name="number_of_tickets" value="<%= params[:number_of_tickets] %>">
+    <!--<input hidden name="number_of_tickets" value="<%= params[:number_of_tickets] %>">-->
     <% @flights.each do |flight| %>
       <div class="mb-3">
         <div class="radio-toolbar">
-          <%= form.radio_button 'flight_id', flight.id, disabled: invalid_ticket_amount?(params[:number_of_tickets]) %>
+          <%= form.radio_button 'flight_id', flight.id %>
           <%= form.label "flight_id_#{flight.id}" do %>
             <%= render 'flight_information', flight: flight %>
           <% end %>

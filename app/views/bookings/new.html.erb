@@ -10,28 +10,9 @@
 <% end %>
 
 <h1>Book flight</h1>
-
 <h3>Flight information</h3>
 <%= render 'flights/flight_information', flight: @flight %>
 
-<p><strong>Passenger amount: <%= @passenger_amount %></strong></p>
-
-<%= form_with model: @booking do |form| %>
-  <input hidden name="booking[flight_id]" value="<%= @flight.id %>">
-
-  <%= form.fields_for :passengers do |sub_form| %>
-    <div><strong><%= "Passenger information:" %></strong></div>
-    <div class="input-row">
-      <%= sub_form.label :name, 'Name' %>
-      <%= sub_form.text_field :name %>
-    </div>
-    <div class="input-row">
-      <%= sub_form.label :email, "Email" %>
-      <%= sub_form.text_field :email %>
-    </div>
-  <% end %>
-
-  <%= form.submit "Book flight", class: "btn btn-secondary btn-sm" %>
-<% end %>
+<%= render 'booking_form', booking: @booking, flight_id: @flight.id %>
 
 <%= link_to 'Back to flights', root_path %>
