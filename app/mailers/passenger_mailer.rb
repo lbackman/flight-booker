@@ -5,9 +5,12 @@ class PassengerMailer < ApplicationMailer
   #
   #   en.passenger_mailer.confirmation_email.subject
   #
-  def confirmation_email
-    @greeting = "Hi"
+  def confirmation_email(passenger)
+    @booking = params[:booking]
+    @url     = booking_url(@booking, host: 'localhost:3000')
+    @email   = passenger.email
+    @name    = passenger.name
 
-    mail to: "to@example.org"
+    mail(to: @email, subject: "Information about your booking on flight #{@booking.flight_id}")
   end
 end
