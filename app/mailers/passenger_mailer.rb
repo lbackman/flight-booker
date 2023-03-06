@@ -5,8 +5,8 @@ class PassengerMailer < ApplicationMailer
   #
   #   en.passenger_mailer.confirmation_email.subject
   #
-  def confirmation_email(passenger)
-    @booking = params[:booking]
+  def confirmation_email(passenger, booking)
+    @booking = booking
     @url     = booking_url(@booking, host: 'localhost:3000')
     @email   = passenger.email
     @name    = passenger.name
